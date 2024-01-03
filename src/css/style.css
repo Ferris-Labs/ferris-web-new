@@ -11,7 +11,7 @@
   --clr-accent-red: hsl(0, 80%, 40%);
   --clr-accent-blue: hsl(217, 48%, 39%);
 
-  --ff-primary: 'Work Sans', sans-serif;
+  --ff-primary: "Work Sans", sans-serif;
 
   --ff-body: var(--ff-primary);
   --ff-heading: var(--ff-primary);
@@ -113,7 +113,6 @@ svg {
   margin-left: auto;
   padding: 2pt 2pt;
   box-shadow: 10px 10px 5px var(--clr-neutral-gray);
-
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
@@ -199,11 +198,13 @@ p[data-width="wide"] {
 
 /* ------ */
 
-/* navigation */
+/* NAVIGATION */
 .primary-header {
   padding-top: var(--size-300);
   padding-bottom: var(--size-300);
-  background-color: var(--clr-primary-black)
+  background-color: var(--clr-primary-black);
+  position: sticky;
+  top: 0;
 }
 
 .nav-wrapper {
@@ -286,48 +287,61 @@ p[data-width="wide"] {
   }
 }
 
-/* footer */
-.primary-footer {
-  --logo-color: var(--clr-neutral-dark);
-}
-
-.primary-footer-wrapper {
+/* FOOTER */
+footer {
   display: grid;
-  gap: var(--size-700);
-  grid-template-areas: "form"
-    "nav"
-    "logo-social";
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: 100px 100px;
+  background: var(--clr-primary-black);
 }
 
-.primary-footer-logo-social {
-  grid-area: logo-social;
-
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  gap: var(--size-700);
-}
-
-.primary-footer-nav {
-  grid-area: nav;
-}
-
-.primary-footer-form {
-  grid-area: form;
-
+footer .container {
+  width: 100%;
   display: grid;
-  align-content: space-between;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 20px;
 }
 
-.primary-footer form {
-  display: flex;
-  gap: var(--size-200);
+footer .container .sec h2 {
+  position: relative;
+  background: var(--clr-primary-black);
+  color: var(--clr-primary-white);
+  font-weight: var(--fw-bold);
+  margin-bottom: 20pt;
 }
 
-input:where([type="text"], [type="email"], ) {
-  border-radius: 100vw;
-  border: 0;
-  padding: var(--size-300) var(--size-400);
+footer .container .sec h2::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 1;
+  width: 40px;
+  height: 2px;
+  background-color: var(--clr-neutral-lightgray);
+}
+
+footer .container li {
+  position: relative;
+  list-style: none;
+  font-size: var(--fs-400);
+}
+
+footer .container li a {
+  color: var(--clr-primary-white);
+  text-decoration: none;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+footer .container li a:hover {
+  color: var(--clr-neutral-lightgray);
+  text-decoration: underline;
+}
+
+footer .container .sec:last-child {
+  color: var(--clr-accent-blue);
 }
 
 @media (min-width: 50em) {
@@ -343,25 +357,29 @@ input:where([type="text"], [type="email"], ) {
 }
 
 @media (max-width: 50em) {
-  .primary-footer-wrapper>* {
+  .primary-footer-wrapper > * {
     margin-inline: auto;
   }
 }
 
-/* ----- */
-
-.footer-nav {
-  columns: 2;
-  gap: clamp(var(--size-200), 30vw, var(--size-900));
+.footer-icons {
+  margin-block: 3rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15pt;
 }
 
-.footer-nav a {
-  color: var(--clr-neutral-100);
-  text-decoration: none;
+.footer-icon img {
+  width: 15pt;
+  height: auto;
+  fill: var(--clr-neutral-lightgray);
 }
 
-.footer-nav a:is(:hover, :focus) {
-  color: var(--clr-accent-blue);
+.footer-text {
+  color: var(--clr-primary-white);
+  text-align: center;
+  margin-inline: auto;
 }
 
 /* social list */
@@ -487,7 +505,7 @@ input:where([type="text"], [type="email"], ) {
   margin-inline: var(--size-400);
 }
 
-.slider>* {
+.slider > * {
   position: relative;
   flex: 0 0 auto;
   width: 100%;
@@ -502,13 +520,13 @@ input:where([type="text"], [type="email"], ) {
     margin-inline: 0;
   }
 
-  .slider>* {
+  .slider > * {
     width: 50%;
   }
 }
 
 @media (min-width: 50em) {
-  .slider>* {
+  .slider > * {
     width: 35%;
   }
 }
@@ -740,32 +758,34 @@ input:where([type="text"], [type="email"], ) {
 
 /* HERO + BACKGROUND Images Section */
 .hero {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('/images/fl-code-background.png');
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.7)
+    ),
+    url("/images/fl-code-background.png");
   background-color: var(--clr-neutral-gray);
   background-size: 100% 100%;
-  /* Fill the container without repeating */
   background-repeat: no-repeat;
-  /* Prevent the background image from repeating */
   background-position: center;
-  /* Center the background image */
   background-blend-mode: multiply;
   padding-block: 20pt 20pt;
   height: auto;
   z-index: -1;
 }
 
-/* Set opacity for the linear gradient background */
 .hero::before {
   content: "";
   position: absolute;
   opacity: 0.9;
   inset: 0;
-  background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7));
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.7)
+  );
   z-index: -1;
   pointer-events: none;
 }
 
-/* Hero Image*/
 .hero-image {
   max-height: 80%;
   max-width: 80%;
@@ -775,10 +795,7 @@ input:where([type="text"], [type="email"], ) {
   z-index: 1;
 }
 
-/* -------------------------------- */
-
 /* HORIZONTAL rule */
-
 .hr-text {
   line-height: 1em;
   position: relative;
@@ -787,11 +804,16 @@ input:where([type="text"], [type="email"], ) {
   color: red;
   text-align: center;
   height: 1.5em;
-  opacity: .5;
+  opacity: 0.5;
 
   &:before {
-    content: '';
-    background: linear-gradient(to right, transparent, var(--clr-neutral-gray), transparent);
+    content: "";
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--clr-neutral-gray),
+      transparent
+    );
     position: absolute;
     left: 0;
     top: 50%;
@@ -805,7 +827,7 @@ input:where([type="text"], [type="email"], ) {
     display: inline-block;
     color: red;
 
-    padding: 0 .5em;
+    padding: 0 0.5em;
     line-height: 1.5em;
     /* this is really the only tricky part, you need to specify the background color of the container element... */
     color: var(--clr-accent-red);
@@ -846,7 +868,6 @@ input:where([type="text"], [type="email"], ) {
   /* Center align horizontally and add space below each element */
 }
 
-
 .text-with-partial-underline {
   position: relative;
   display: inline-block;
@@ -869,7 +890,6 @@ input:where([type="text"], [type="email"], ) {
   font-size: var(--fs-650);
   padding: 0 5rem 0 8rem;
 }
-
 
 /* SLIDING LOGOS BANNER */
 @keyframes slide {
